@@ -1,23 +1,29 @@
 "use client";
 import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation"; // ✅ App Router import
 import { useState } from "react";
 
 export default function Signup() {
+  const router = useRouter();
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); // ⛔ stop page reload
+    e.preventDefault();
 
     try {
-      const res = await axios.post("/api/v1/signup", {
+      const res = await axios.post("http://localhost:3000/api/v1/signup", {
         username,
         email,
         password,
       });
+
       console.log("✅ User created:", res.data);
+
+      // ✅ Redirect to signin page
+      router.push("/signin");
     } catch (err) {
       console.error("❌ Signup failed:", err);
     }
@@ -28,7 +34,6 @@ export default function Signup() {
       <div className="w-full max-w-sm p-8 bg-white rounded-2xl shadow-lg">
         <h2 className="text-2xl font-bold text-center mb-6">📝 Sign Up</h2>
 
-        {/* Attach handleSubmit here */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <input
             onChange={(e) => setUsername(e.target.value)}
