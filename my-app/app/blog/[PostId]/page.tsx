@@ -14,6 +14,7 @@ export default async function Blog({ params }: any) {
       title - {data.title}
       <br />
       body - {data.body}
+      // learn about catching routes , like catching all the routes
     </div>
   );
 }
