@@ -4,10 +4,11 @@ import CredentialsProvider from "next-auth/providers/credentials";
 const handler = NextAuth({
   providers: [
     CredentialsProvider({
-      name: "Singup Form",
+      name: "Email",
 
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
+        username: { label: "Username", type: "text", placeholder: "ankit" },
+        email: { label: "Email", type: "text", placeholder: "ankit@mail.com" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
@@ -28,4 +29,5 @@ const handler = NextAuth({
   ],
 });
 
-export { handler as GET, handler as POST };
+export const GET = handler;
+export const POST = handler;
